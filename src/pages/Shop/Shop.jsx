@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import CollectionPreview from '../../components/CollectionPreview/CollectionPreview';
 import ShopData from "../Shop/ShopData";
-
-console.log(ShopData);
 
 const Shop = () => {
     const [shopData, setShopData] = useState([]);
     useEffect(() => {
         setShopData(ShopData)
     }, [])
-    console.log(shopData)
     return (
-        <div>
-            shop page
+        <div className="shop-page">
+            {
+                shopData.map(data => <CollectionPreview data={data} key={data.id}></CollectionPreview>)
+            }
         </div>
     );
 };
