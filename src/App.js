@@ -9,11 +9,13 @@ import {
   Link
 } from "react-router-dom"
 import Shop from './pages/Shop/Shop';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <div>
       <Router>
+      <Header/>
         <Switch>
           <Route path="/home">
           <HomePage></HomePage>
