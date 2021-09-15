@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom"
 import Shop from './pages/Shop/Shop';
 import Header from './components/Header/Header';
@@ -64,8 +65,9 @@ class App extends React.Component {
             <Route path="/shop">
               <Shop></Shop>
             </Route>
-            <Route path="/signIn">
-              <SignInAndSignUp></SignInAndSignUp>
+            <Route exact path="/signIn" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInAndSignUp />)}>
+              
+              {/* <SignInAndSignUp></SignInAndSignUp> */}
             </Route>
             <Route exact path="/">
             <HomePage></HomePage>
@@ -78,8 +80,12 @@ class App extends React.Component {
  
 }
 
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+})
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
